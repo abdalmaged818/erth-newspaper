@@ -10,7 +10,7 @@
                 var months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
                 el.textContent = days[now.getDay()] + '، ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
         }
-  } catch(e) {}
+  } catch(e) {}h
 
   var toggle=document.getElementById('navToggle');
   var panel=document.getElementById('mobileNav');
@@ -31,7 +31,18 @@
     if(bd)bd.classList.remove('is-visible');
     document.body.style.overflow='';
   }
-  if(toggle)toggle.addEventListener('click',function(){panel&&panel.classList.contains('is-open')?closeNav():openNav();});
+  if(toggle) {
+  toggle.addEventListener('click', function(){
+    panel && panel.classList.contains('is-open') ? closeNav() : openNav();
+  });
+
+  // دعم Safari iOS - touchstart event
+  toggle.addEventListener('touchstart', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    panel && panel.classList.contains('is-open') ? closeNav() : openNav();
+  }, { passive: false });
+}
   if(closeBtn)closeBtn.addEventListener('click',closeNav);
   if(bd)bd.addEventListener('click',closeNav);
   if(panel)panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeNav);});
