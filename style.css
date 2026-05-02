@@ -2813,3 +2813,47 @@ p { margin: 0; }
   .video-card__title { font-size: 19px; }
   .video-card__body { padding: 18px 20px; }
 }
+
+/* ═══════════════════════════════════════════
+   إصلاح skip-link في الجوال - نمط .sr-only الحديث
+   لا يؤثر على نسخة الكمبيوتر
+   ═══════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .skip-link {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* عند focus (يستخدم الـ Tab keyboard) - يظهر الرابط */
+  .skip-link:focus {
+    position: fixed !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    background: var(--olive-deep, #232C22) !important;
+    color: var(--cream, #F4EFDF) !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    z-index: 10000 !important;
+  }
+}
+
+/* ضمان احتياطي إضافي ضد horizontal scroll في الجوال */
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: clip !important;
+    max-width: 100vw !important;
+  }
+}
